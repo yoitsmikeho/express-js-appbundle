@@ -74,9 +74,6 @@ jobs:
           	echo "Skip Xray scanning!!!"
           fi
 
-      - name: JFrog Curation Audit
-        run: jf curation-audit | true
-      
       - name: Docker Authenticate
         uses: docker/login-action@v3
         with:
