@@ -106,30 +106,30 @@ jobs:
         run: |
           jf rt u dist/ ${{ vars.JF_PROJECT }}-python-dev/example-projects/ --module=jfrog-python-example
 
-      #- name: Docker Authenticate
-      #  uses: docker/login-action@v3
-      #  with:
-      #    registry: ${{ vars.JF_URL }}
-      #    username: ${{ steps.setup-cli.outputs.oidc-user }}
-      #    password: ${{ steps.setup-cli.outputs.oidc-token }}
+      - name: Docker Authenticate
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ vars.JF_URL }}
+          username: ${{ steps.setup-cli.outputs.oidc-user }}
+          password: ${{ steps.setup-cli.outputs.oidc-token }}
 
-      #- name: Docker Build and Push
-      #  uses: docker/build-push-action@v5
-      #  id: build
-      #  with:
-      #    push: true
-      #    tags: ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}
-      #    provenance: false
+      - name: Docker Build and Push
+        uses: docker/build-push-action@v5
+        id: build
+        with:
+          push: true
+          tags: ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}
+          provenance: false
       
       #- name: Docker Scan
       #  run: |  
       #     jf docker pull ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:$GITHUB_RUN_NUMBER
       #     jf docker scan ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:$GITHUB_RUN_NUMBER
       
-      #- name: Docker Add Package to Build
-      #  run: |  
-      #     echo "${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}@${{ steps.build.outputs.digest }}" > metadata.json
-      #     jf rt build-docker-create ${{ env.DOCKER_REPO }} --image-file metadata.json 
+      - name: Docker Add Package to Build
+        run: |  
+           echo "${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}@${{ steps.build.outputs.digest }}" > metadata.json
+           jf rt build-docker-create ${{ env.DOCKER_REPO }} --image-file metadata.json 
       
       #- name: Publish Release Note and HELM charts
       #  run: |
@@ -145,22 +145,3 @@ jobs:
       - name: Build Scan
         run: |            
           jf build-scan
-      
-      #- name: Docker build and push
-      #  env:
-      #    JFROG_CLI_BUILD_PROJECT: ${{ vars.JF_PROJECT }}
-      #    JFROG_CLI_BUILD_NAME: ${{ github.event.inputs.build_name }}
-      #    JF_ENV_1: ${{ secrets.JF_SECRET_ENV_1 }}
-      #    JF_URL: https://${{ vars.JF_URL }}/
-      #  run: |
-      #    docker tag ${{ github.event.inputs.docker_image_name }}:$GITHUB_RUN_NUMBER $JF_URL/${{ github.event.inputs.rt_docker_repo }}/${{ github.event.inputs.docker_image_name }}:$GITHUB_RUN_NUMBER
-      #    docker build --build-arg JF_TOKEN=${JF_ENV_1} . -t ${{ github.event.inputs.docker_image_name }}:$GITHUB_RUN_NUMBER
-      #    jf docker push $JF_URL/${{ github.event.inputs.rt_docker_repo }}/${{ github.event.inputs.docker_image_name }}:$GITHUB_RUN_NUMBER --build-name=$JFROG_CLI_BUILD_NAME --build-number=$GITHUB_RUN_NUMBER 
-      
-      #- name: Publish build 
-      #  env:
-      #    JFROG_CLI_BUILD_PROJECT: ${{ vars.JF_PROJECT }}
-      #    JFROG_CLI_BUILD_NAME: ${{ github.event.inputs.build_name }}
-      #  run: |
-      #    jf rt bp $JFROG_CLI_BUILD_NAME $GITHUB_RUN_NUMBER
-      
