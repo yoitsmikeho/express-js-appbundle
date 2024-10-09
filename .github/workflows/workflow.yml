@@ -131,10 +131,10 @@ jobs:
            echo "${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}@${{ steps.build.outputs.digest }}" > metadata.json
            jf rt build-docker-create ${{ env.DOCKER_REPO }} --image-file metadata.json 
       
-      - name: Publish Release Note and HELM charts
-        run: |
-          jf rt u rn/Release-Note-App-1.0.pdf ${{ github.event.inputs.rt_generic_repo }} --flat --module="release_note:$GITHUB_RUN_NUMBER"
-          jf rt u "helm/*.tgz" ${{ github.event.inputs.rt_helm_repo }} --flat --module="helm_charts:$GITHUB_RUN_NUMBER"
+      #- name: Publish Release Note and HELM charts
+      #  run: |
+      #    jf rt u rn/Release-Note-App-1.0.pdf ${{ github.event.inputs.rt_generic_repo }} --flat --module="release_note:$GITHUB_RUN_NUMBER"
+      #    jf rt u "helm/*.tgz" ${{ github.event.inputs.rt_helm_repo }} --flat --module="helm_charts:$GITHUB_RUN_NUMBER"
       
       - name: Publish Build Info
         run: |
