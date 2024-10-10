@@ -18,5 +18,4 @@ RUN curl -fL https://install-cli.jfrog.io | sh
 COPY server.js ./
 COPY public public/
 COPY views views/
-COPY creds.txt /usr/src/
 CMD [ "node", "server.js" ]
