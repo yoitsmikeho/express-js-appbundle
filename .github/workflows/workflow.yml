@@ -102,4 +102,4 @@ jobs:
       
       - name: Build Scan
         run: |            
-          jf build-scan
+          jf build-scan --fail=${{ github.event.inputs.xr_override_fail_build }}
