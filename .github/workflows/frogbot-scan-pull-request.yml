@@ -27,6 +27,7 @@ jobs:
         with:
           oidc-provider-name: yoitsmikeho-github
           oidc-audience: yoitsmikeho-audience
+          version: latest
         env:
           # [Mandatory]
           # JFrog platform URL
