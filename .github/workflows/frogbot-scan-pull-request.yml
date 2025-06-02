@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: "16.x"
 
-      - uses: jfrog/frogbot@v2
+      - uses: jfrog/frogbot@v2.26.2
         with:
           oidc-provider-name: yoitsmikeho-github
           oidc-audience: yoitsmikeho-audience
