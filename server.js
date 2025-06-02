@@ -8,6 +8,7 @@ var app = express();
 var password = "Ivan_jr22"
 var token = "glpat-jhbdfkjbdfb"
 var owner = "Mike Holland"
+var credit_card = 4111111111111111
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
