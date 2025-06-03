@@ -65,6 +65,7 @@ jobs:
       
       - name: NPM Audit 
         run: |
+          jf --version
           jf npmc --repo-resolve ${{ github.event.inputs.rt_npm_remote_repo_id }} --repo-deploy mikeho-github-npm-local
           jf npm i --omit dev
           jf npm publish --project=${{ vars.JF_PROJECT }}
