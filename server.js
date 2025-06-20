@@ -9,6 +9,7 @@ var password = "Ivan_jr22"
 // Extra Secrets
 var token = "glpat-jhbdfkjbdfb"
 var owner = "Mike Holland"
+var ccn = "5555 5555 5555 4444"
 
 // set the view engine to ejs
 app.set('view engine', 'ejs');
