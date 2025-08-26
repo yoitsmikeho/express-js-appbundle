@@ -48,6 +48,8 @@ jobs:
       run: |
         jf audit --sast --secrets --iac --format=sarif > jfrog_sast.sarif
         jq 'walk(if type == "object" then with_entries(select(.value != null)) else . end)' jfrog_sast.sarif > jfrog_sast2.sarif
+        jf rt upload jfrog_sast.sarif grafana-plugins-generic-local/sarif-express-js-appbundle/
+        jf rt upload jfrog_sast2.sarif grafana-plugins-generic-local/sarif-express-js-appbundle/
       env:
         JFROG_CLI_LOG_LEVEL: DEBUG
 
