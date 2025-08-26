@@ -47,9 +47,12 @@ jobs:
     - name: Run JFrog SAST
       run: |
         jf audit --sast --secrets --iac --format=sarif > jfrog_sast.sarif
+        jq 'walk(if type == "object" then with_entries(select(.value != null)) else . end)' jfrog_sast.sarif > jfrog_sast2.sarif
+      env:
+        JFROG_CLI_LOG_LEVEL: DEBUG
 
 
     - name: Upload output to generate autofix
       uses: github/codeql-action/upload-sarif@v3
       with:
-        sarif_file: jfrog_sast.sarif
+        sarif_file: jfrog_sast2.sarif
