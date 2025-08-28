@@ -42,7 +42,7 @@ jobs:
       with:
           oidc-provider-name: mikeho-github
           oidc-audience: mikeho-audience
-          version: 2.78.6
+          version: 2.78.7
 
     - name: Run JFrog SAST
       run: |
@@ -57,4 +57,4 @@ jobs:
     - name: Upload output to generate autofix
       uses: github/codeql-action/upload-sarif@v3
       with:
-        sarif_file: jfrog_sast2.sarif
+        sarif_file: jfrog_sast.sarif
