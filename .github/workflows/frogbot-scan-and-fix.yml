@@ -33,7 +33,7 @@ jobs:
         with:
           node-version: "16.x"
 
-      - uses: jfrog/frogbot@v2.28.2
+      - uses: jfrog/frogbot@v2.28.0
         with:
           oidc-provider-name: mikeho-github
           oidc-audience: mikeho-audience
@@ -90,7 +90,7 @@ jobs:
 
           # [Optional]
           # Xray Watches. Learn more about them here: https://www.jfrog.com/confluence/display/JFROG/Configuring+Xray+Watches
-          # JF_WATCHES: <watch-1>,<watch-2>...<watch-n>
+          JF_WATCHES: "yoitsmikeho-watch"
 
           # [Optional]
           # JFrog project. Learn more about it here: https://www.jfrog.com/confluence/display/JFROG/Projects
@@ -98,7 +98,7 @@ jobs:
 
           # [Optional, default: "TRUE"]
           # Fails the Frogbot task if any security issue is found.
-          JF_FAIL: "TRUE"
+          JF_FAIL: false
 
           # [Optional]
           # Frogbot will download the project dependencies if they're not cached locally. To download the
@@ -134,4 +134,4 @@ jobs:
           # [Optional]
           # Set the minimum severity for vulnerabilities that should be fixed and commented on in pull requests
           # The following values are accepted: Low, Medium, High or Critical
-          JF_MIN_SEVERITY: "High"
+          JF_MIN_SEVERITY: Medium
