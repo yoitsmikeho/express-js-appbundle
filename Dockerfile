@@ -1,4 +1,4 @@
-FROM node:16.19.1
+FROM node:16.19.1-bullseye
 #ARG JF_TOKEN
 
 # Create app directory
