@@ -71,6 +71,7 @@ jobs:
           jf npmc --repo-resolve ${{ github.event.inputs.rt_npm_remote_repo_id }} --repo-deploy mikeho-github-npm-local
           jf npm cache clean --force
           jf npm i --omit dev
+          jf npm ls
           jf npm publish --project=${{ vars.JF_PROJECT }}
           #jf rt build-publish --project=${{ vars.JF_PROJECT }}
           
