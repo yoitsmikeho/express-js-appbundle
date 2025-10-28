@@ -69,9 +69,10 @@ jobs:
         run: |
           jf --version
           jf npmc --repo-resolve ${{ github.event.inputs.rt_npm_remote_repo_id }} --repo-deploy mikeho-github-npm-local
+          jf npm cache clean --force
           jf npm i --omit dev
           jf npm publish --project=${{ vars.JF_PROJECT }}
-          jf rt build-publish --project=${{ vars.JF_PROJECT }}
+          #jf rt build-publish --project=${{ vars.JF_PROJECT }}
           
           if [ ${{ github.event.inputs.xr_enable_scan }} == 'true' ]; then
           	echo "Execute Xray scanning ..."
