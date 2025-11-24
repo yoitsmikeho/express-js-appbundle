@@ -32,6 +32,7 @@ permissions:
   id-token: write         # for creating OIDC tokens for signing
   packages: write         # for uploading attestations
   contents: read          # read the contents permission
+  attestations: write     # Required for attestation
   security-events: write  # for uploading code scanning
 jobs:
   build:
@@ -93,7 +94,7 @@ jobs:
         with:
           push: true
           tags: ${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}:${{ github.run_number }}
-          provenance: false
+          provenance: true
       
       - name: Docker Add Package to Build
         run: |  
@@ -116,4 +117,4 @@ jobs:
         uses: actions/attest-build-provenance@v2
         with:
           subject-name: oci://${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
-          subject-digest: ${{ steps.build-and-push.outputs.digest }}
+          subject-digest: ${{ steps.build.outputs.digest }}
