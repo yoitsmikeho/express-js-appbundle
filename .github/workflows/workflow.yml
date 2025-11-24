@@ -116,5 +116,5 @@ jobs:
       - name: Attest docker image
         uses: actions/attest-build-provenance@v2
         with:
-          subject-name: oci://${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
+          subject-name: oci://${{ vars.JF_URL }}/${{ env.DOCKER_REPO }}/${{ env.IMAGE_NAME }}
           subject-digest: ${{ steps.build.outputs.digest }}
