@@ -68,12 +68,13 @@ jobs:
             
       - name: Curation Audit 
         run: |
+          jf npmc --repo-resolve ${{ github.event.inputs.rt_npm_remote_repo_id }} --repo-deploy mikeho-github-npm-local
           jf curation-audit
           
       - name: NPM Configuration and Build 
         run: |
           jf --version
-          jf npmc --repo-resolve ${{ github.event.inputs.rt_npm_remote_repo_id }} --repo-deploy mikeho-github-npm-local
+          #jf npmc --repo-resolve ${{ github.event.inputs.rt_npm_remote_repo_id }} --repo-deploy mikeho-github-npm-local
           jf npm i --omit dev
           jf npm ci
           jf npm publish --project=${{ vars.JF_PROJECT }}
