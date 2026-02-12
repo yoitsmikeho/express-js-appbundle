@@ -118,7 +118,7 @@ jobs:
       
       - name: Build Scan
         run: |            
-          jf build-scan --fail=${{ github.event.inputs.xr_override_fail_build }} --project=${{ vars.JF_PROJECT }} --vuln --watches="yoitsmikeho-watch"
+          jf build-scan --fail=${{ github.event.inputs.xr_override_fail_build }} --project=${{ vars.JF_PROJECT }} --vuln --watches "yoitsmikeho-watch"
 
       - name: Attest docker image
         uses: actions/attest-build-provenance@v2
