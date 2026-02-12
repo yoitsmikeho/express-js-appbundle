@@ -20,7 +20,7 @@ on:
       xr_enable_scan:
         required: true
         type: string
-        default: "false"
+        default: "true"
         description: "Scan with Xray"
       xr_override_fail_build:
         required: true
@@ -65,15 +65,21 @@ jobs:
             oidc-provider-name: mikeho-github
             oidc-audience: mikeho-audience
             version: latest
-      
-      - name: NPM Audit 
+            
+      - name: Curation Audit 
+        run: |
+          jf curation-audit
+          
+      - name: NPM Configuration and Build 
         run: |
           jf --version
           jf npmc --repo-resolve ${{ github.event.inputs.rt_npm_remote_repo_id }} --repo-deploy mikeho-github-npm-local
           jf npm i --omit dev
           jf npm ci
           jf npm publish --project=${{ vars.JF_PROJECT }}
-          
+
+      - name: Xray and Advanced Security Scanning  
+        run: |
           if [ ${{ github.event.inputs.xr_enable_scan }} == 'true' ]; then
           	echo "Execute Xray scanning ..."
           	jf audit --npm --fail=${{ github.event.inputs.xr_override_fail_build }} --project=${{ vars.JF_PROJECT }} --secrets --iac --vuln --sast --sca
