@@ -88,6 +88,7 @@ jobs:
           # [Optional, default: "FALSE"]
           # Displays all existing vulnerabilities, including the ones that were added by the pull request.
           JF_INCLUDE_ALL_VULNERABILITIES: true
+          JF_INCLUDE_VULNERABILITIES: true
 
           # [Optional, default: "TRUE"]
           # Fails the Frogbot task if any security issue is found.
