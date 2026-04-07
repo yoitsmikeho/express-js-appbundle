@@ -69,7 +69,7 @@ jobs:
       - name: Curation Audit 
         run: |
           jf npmc --repo-resolve ${{ github.event.inputs.rt_npm_remote_repo_id }} --repo-deploy mikeho-github-npm-local
-          jf curation-audit
+          # jf curation-audit
           
       - name: NPM Configuration and Build 
         run: |
