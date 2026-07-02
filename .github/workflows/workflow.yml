@@ -74,7 +74,7 @@ jobs:
           echo -e "\n=============================="
           echo "=== JFrog access token ==="
           #jf exchange-oidc-token mikeho-github $(echo "$RAW_TOKEN" | base64 -d)
-          jf exchange-oidc-token mikeho-github $(echo "$RAW_TOKEN")
+          jf exchange-oidc-token mikeho-github $(echo "$RAW_TOKEN") --oidc-audience mikeho-audience
           echo -e "\n=============================="
             
       - name: Curation Audit 
