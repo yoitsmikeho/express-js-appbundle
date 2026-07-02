@@ -65,6 +65,16 @@ jobs:
             oidc-provider-name: mikeho-github
             oidc-audience: mikeho-audience
             version: latest
+
+      - name: Extract GitHub OIDC Token
+        run: |
+          RAW_TOKEN=$(curl -s -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "${ACTIONS_ID_TOKEN_REQUEST_TOKEN}&audience=https://${{ vars.JF_URL }}" | jq -r '.value')
+          echo "=== COPY BASE64 STRING BELOW ==="
+          echo "$RAW_TOKEN" | base64 -w 0
+          echo -e "\n=============================="
+          echo "=== JFrog access token ==="
+          jf exchange-oidc-token mikeho-github $(echo "$RAW_TOKEN" | base64 --d)
+          echo -e "\n=============================="
             
       - name: Curation Audit 
         run: |
