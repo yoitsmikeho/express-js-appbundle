@@ -63,7 +63,7 @@ jobs:
           JF_PROJECT: ${{ vars.JF_PROJECT }}
         with:
             oidc-provider-name: mikeho-github
-            #oidc-audience: mikeho-audience
+            oidc-audience: mikeho-audience
             version: latest
 
       - name: Extract GitHub OIDC Token
@@ -73,7 +73,7 @@ jobs:
           echo "$RAW_TOKEN" | base64 -w 0
           echo -e "\n=============================="
           echo "=== JFrog access token ==="
-          jf exchange-oidc-token mikeho-github $RAW_TOKEN 
+          jf exchange-oidc-token mikeho-github $RAW_TOKEN --oidc-audience=mikeho-audience --url=https://${{ vars.JF_URL }}
           echo -e "\n=============================="
             
       - name: Curation Audit 
