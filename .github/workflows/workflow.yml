@@ -60,22 +60,22 @@ jobs:
         id: setup-cli
         env:
           JF_URL: https://${{ vars.JF_URL }}/
-          #JF_PROJECT: ${{ vars.JF_PROJECT }}
+          JF_PROJECT: ${{ vars.JF_PROJECT }}
         with:
             oidc-provider-name: mikeho-github
-            #oidc-audience: mikeho-audience
-            #version: latest
+            oidc-audience: mikeho-audience
+            version: latest
 
       - name: Extract GitHub OIDC Token
         run: |
-          #RAW_TOKEN=$(curl -s -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=mikeho-audience" | jq -r '.value')
-          RAW_TOKEN=$(curl -s -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "${ACTIONS_ID_TOKEN_REQUEST_URL}" | jq -r '.value')
+          RAW_TOKEN=$(curl -s -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "${ACTIONS_ID_TOKEN_REQUEST_URL}&audience=mikeho-audience" | jq -r '.value')
+          #RAW_TOKEN=$(curl -s -H "Authorization: Bearer $ACTIONS_ID_TOKEN_REQUEST_TOKEN" "${ACTIONS_ID_TOKEN_REQUEST_URL}" | jq -r '.value')
           echo "=== COPY BASE64 STRING BELOW ==="
           echo "$RAW_TOKEN" | base64 -w 0
           echo -e "\n=============================="
           echo "=== JFrog Access Token ==="
-          #ACCESS_TOKEN=$(jf exchange-oidc-token mikeho-github $RAW_TOKEN --project=${{ vars.JF_PROJECT }} | jq -r '.AccessToken')
-          ACCESS_TOKEN=$(jf exchange-oidc-token mikeho-github $RAW_TOKEN | jq -r '.AccessToken')
+          ACCESS_TOKEN=$(jf exchange-oidc-token mikeho-github $RAW_TOKEN --project=${{ vars.JF_PROJECT }} | jq -r '.AccessToken')
+          #ACCESS_TOKEN=$(jf exchange-oidc-token mikeho-github $RAW_TOKEN | jq -r '.AccessToken')
           echo "$ACCESS_TOKEN"
           echo -e "\n=============================="
           sleep 20
