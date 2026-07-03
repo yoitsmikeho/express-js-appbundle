@@ -78,6 +78,7 @@ jobs:
           ACCESS_TOKEN=$(jf exchange-oidc-token mikeho-github $RAW_TOKEN | jq -r '.AccessToken')
           echo "$ACCESS_TOKEN"
           echo -e "\n=============================="
+          sleep 20
           echo "=== JFrog Token Permissions==="
           curl -s -H "Authorization: Bearer $ACCESS_TOKEN" "https://${{ vars.JF_URL }}/access/api/v1/tokens/me" | jq 
           echo -e "\n=============================="
