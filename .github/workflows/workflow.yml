@@ -60,7 +60,7 @@ jobs:
         id: setup-cli
         env:
           JF_URL: https://${{ vars.JF_URL }}/
-          JF_PROJECT: ${{ vars.JF_PROJECT }}
+          #JF_PROJECT: ${{ vars.JF_PROJECT }}
         with:
             oidc-provider-name: mikeho-github
             oidc-audience: mikeho-audience
@@ -73,7 +73,7 @@ jobs:
           echo "$RAW_TOKEN" | base64 -w 0
           echo -e "\n=============================="
           echo "=== JFrog Access Token ==="
-          ACCESS_TOKEN=$(jf exchange-oidc-token mikeho-github $RAW_TOKEN | jq -r '.AccessToken')
+          ACCESS_TOKEN=$(jf exchange-oidc-token mikeho-github $RAW_TOKEN --project=${{ vars.JF_PROJECT }} | jq -r '.AccessToken')
           echo "$ACCESS_TOKEN"
           echo -e "\n=============================="
           echo "=== JFrog Token Permissions==="
