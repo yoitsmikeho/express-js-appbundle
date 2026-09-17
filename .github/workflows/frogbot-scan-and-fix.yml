@@ -36,7 +36,7 @@ jobs:
         with:
           node-version: "16.x"
 
-      - uses: jfrog/frogbot@v3
+      - uses: jfrog/frogbot@v2
         with:
           oidc-provider-name: mikeho-github
           oidc-audience: mikeho-audience
