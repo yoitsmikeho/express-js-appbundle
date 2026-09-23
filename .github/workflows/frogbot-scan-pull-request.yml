@@ -23,7 +23,7 @@ jobs:
         with:
           node-version: "16.x"
 
-      - uses: jfrog/frogbot@v2.32.0
+      - uses: jfrog/frogbot@v3
         with:
           oidc-provider-name: mikeho-github
           oidc-audience: mikeho-audience
@@ -48,6 +48,7 @@ jobs:
           # [Mandatory]
           # The GitHub token automatically generated for the job
           JF_GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          JF_GIT_BASE_BRANCH: "main"
 
           # [Optional, default: https://api.github.com]
           # API endpoint to GitHub
@@ -104,6 +105,7 @@ jobs:
           # If TRUE, Frogbot creates a single pull request with all the fixes.
           # If FALSE, Frogbot creates a separate pull request for each fix.
           # JF_GIT_AGGREGATE_FIXES: "FALSE"
+          JF_AGGREGATE_FIXES: "true"
 
           # [Optional, Default: "FALSE"]
           # Handle vulnerabilities with fix versions only
